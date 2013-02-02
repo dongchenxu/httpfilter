@@ -27,10 +27,6 @@
 			<artifactId>httpfilter-common</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.googlecode.httpfilter</groupId>
-			<artifactId>httpfilter-proxy</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-webapp</artifactId>
 		</dependency>
