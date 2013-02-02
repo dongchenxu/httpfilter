@@ -22,6 +22,7 @@ public class ProxyStarter {
 	 */
 	public static void main(String[] args) {
 		ProxyStarter ps = new ProxyStarter();
+		args = new String[]{"-f","/Users/vlinux/Workspaces/java/svnchina/httpfilter/httpfilter-proxy/conf/rabbit.conf"};
 		ps.start(args);
 	}
 
@@ -44,8 +45,7 @@ public class ProxyStarter {
 		}
 	}
 
-	private void start(String[] args) {
-		args = new String[]{"-f","/Users/vlinux/Workspaces/java/svnchina/httpfilter/httpfilter-proxy/conf/rabbit.conf"};
+	public void start(String[] args) {
 		List<String> configs = new ArrayList<String>();
 		for (int i = 0; i < args.length; i++) {
 			if (args[i].equals("-?") || args[i].equals("-h")

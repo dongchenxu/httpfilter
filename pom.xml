@@ -13,53 +13,17 @@
 
 	<modules>
 		<module>httpfilter-proxy</module>
-		<module>httpfilter-server</module>
+		<!-- <module>httpfilter-server</module> -->
 		<module>httpfilter-common</module>
-		<module>httpfilter-lanucher</module>
+		<!-- <module>httpfilter-lanucher</module> -->
+		<module>httpfilter-web</module>
 	</modules>
 
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.build.sourceEncoding>GBK</project.build.sourceEncoding>
 		<httpfilter.version>1.0-SNAPSHOT</httpfilter.version>
 		<spring.version>3.0.5.RELEASE</spring.version>
 	</properties>
-
-	<build>
-		<finalName>httpfilter</finalName>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<executions>
-					<execution>
-						<goals>
-							<goal>attached</goal>
-						</goals>
-						<phase>package</phase>
-						<configuration>
-							<descriptorRefs>
-								<descriptorRef>jar-with-dependencies</descriptorRef>
-							</descriptorRefs>
-							<archive>
-								<manifest>
-									<mainClass>com.googlecode.httpfilter.rabbit.proxy.ProxyStarter</mainClass>
-								</manifest>
-							</archive>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
-
 
 	<dependencyManagement>
 		<dependencies>
@@ -75,7 +39,7 @@
 			</dependency>
 			<dependency>
 				<groupId>com.googlecode.httpfilter</groupId>
-				<artifactId>httpfilter-server</artifactId>
+				<artifactId>httpfilter-web</artifactId>
 				<version>${httpfilter.version}</version>
 			</dependency>
 			<dependency>
@@ -163,6 +127,11 @@
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-jdbc</artifactId>
 				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>net.sf.jopt-simple</groupId>
+				<artifactId>jopt-simple</artifactId>
+				<version>4.3</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

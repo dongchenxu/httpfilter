@@ -14,7 +14,7 @@
 	<name>httpfilter-proxy</name>
 	<url>http://code.google.com/p/http-filter</url>
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.build.sourceEncoding>GBK</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
 		<dependency>
