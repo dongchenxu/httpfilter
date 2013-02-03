@@ -39,6 +39,9 @@ class ProxyClassLoaderHelper {
 			}
 		}
 		URL[] urlArray = urls.toArray(new URL[urls.size()]);
+		if( urlArray.length == 0 ) {
+			return Thread.currentThread().getContextClassLoader();
+		}
 		return new URLClassLoader(urlArray);
 	}
 

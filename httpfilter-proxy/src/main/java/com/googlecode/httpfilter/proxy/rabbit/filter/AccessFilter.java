@@ -1,8 +1,7 @@
 package com.googlecode.httpfilter.proxy.rabbit.filter;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
 import java.io.Reader;
@@ -14,6 +13,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import com.googlecode.httpfilter.proxy.org.khelekore.rnio.impl.Closer;
 import com.googlecode.httpfilter.proxy.rabbit.util.IPAccess;
 import com.googlecode.httpfilter.proxy.rabbit.util.SProperties;
@@ -61,18 +61,43 @@ public class AccessFilter implements IPAccessFilter {
 		loadAccess(file);
 	}
 
+//	/**
+//	 * Read the data (accesslists) from a file.
+//	 * 
+//	 * @param filename
+//	 *            the name of the file to read from.
+//	 */
+//	private void loadAccess(String filename) {
+//		filename = filename.replace('/', File.separatorChar);
+//
+//		FileInputStream is = null;
+//		try {
+//			is = new FileInputStream(filename);
+//			Reader r = new InputStreamReader(is, "UTF-8");
+//			try {
+//				loadAccess(r);
+//			} finally {
+//				Closer.close(r, logger);
+//			}
+//		} catch (IOException e) {
+//			logger.log(Level.WARNING, "Accessfile '" + filename
+//					+ "' not found: no one allowed", e);
+//		} finally {
+//			Closer.close(is, logger);
+//		}
+//	}
+	
 	/**
 	 * Read the data (accesslists) from a file.
 	 * 
 	 * @param filename
 	 *            the name of the file to read from.
 	 */
-	private void loadAccess(String filename) {
-		filename = filename.replace('/', File.separatorChar);
-
-		FileInputStream is = null;
+	private void loadAccess(String path) {
+		
+		InputStream is = null;
 		try {
-			is = new FileInputStream(filename);
+			is = AccessFilter.class.getResourceAsStream(path);
 			Reader r = new InputStreamReader(is, "UTF-8");
 			try {
 				loadAccess(r);
@@ -80,13 +105,14 @@ public class AccessFilter implements IPAccessFilter {
 				Closer.close(r, logger);
 			}
 		} catch (IOException e) {
-			logger.log(Level.WARNING, "Accessfile '" + filename
+			logger.log(Level.WARNING, "Accessfile '" + path
 					+ "' not found: no one allowed", e);
 		} finally {
 			Closer.close(is, logger);
 		}
+		
 	}
-
+	
 	/**
 	 * Loads in the accessess allowed from the given Reader
 	 * 

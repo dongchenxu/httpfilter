@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.googlecode.httpfilter.common.Configer;
 import com.googlecode.httpfilter.common.utils.ParameterUtils;
 import com.googlecode.httpfilter.proxy.rabbit.html.HtmlBlock;
 import com.googlecode.httpfilter.proxy.rabbit.html.Tag;
@@ -78,7 +79,9 @@ public class FirebugHtmlFilter extends HtmlFilter {
 		if( tagType == TagType.HEAD ) {
 			Tag scriptTag = new Tag("script");
 			scriptTag.addArg("type", "'text/javascript'");
-			scriptTag.addArg("src", "'https://getfirebug.com/firebug-lite.js'");
+//			scriptTag.addArg("src", "'https://getfirebug.com/firebug-lite.js'");
+//			scriptTag.addArg("src", "'http://127.0.0.1:8080/httpfilter-web/javascript/firebug-lite/build/firebug-lite.js'");
+			scriptTag.addArg("src", "'"+Configer.getDefault().getFirebugPath()+"'");
 			block.insertToken(new Token(scriptTag), ++index);
 			block.insertToken(new Token(new Tag("/script")), ++index);
 		}

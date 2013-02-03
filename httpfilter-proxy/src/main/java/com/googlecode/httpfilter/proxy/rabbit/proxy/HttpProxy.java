@@ -1,6 +1,7 @@
 package com.googlecode.httpfilter.proxy.rabbit.proxy;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.NetworkInterface;
@@ -16,7 +17,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.naming.NamingException;
+
 import com.googlecode.httpfilter.proxy.org.khelekore.rnio.BufferHandler;
 import com.googlecode.httpfilter.proxy.org.khelekore.rnio.NioHandler;
 import com.googlecode.httpfilter.proxy.org.khelekore.rnio.StatisticsHolder;
@@ -157,6 +160,15 @@ public class HttpProxy {
 	 */
 	public void setConfig(String conf) throws IOException {
 		setConfig(new Config(conf));
+	}
+	
+	/**
+	 * set the config file to use for this proxy
+	 * @param is
+	 * @throws IOException
+	 */
+	public void setConfig(InputStream is) throws IOException {
+		setConfig(new Config(is));
 	}
 
 	private void setupLogging() {
