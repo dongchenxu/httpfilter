@@ -79,7 +79,7 @@ public class GZipHandler extends BaseHandler {
 		if (ce == null)
 			return true;
 		ce = ce.toLowerCase();
-		return !(ce.equals("gzip") || ce.equals("deflate"));
+		return !(ce.equals("gzip") || ce.equals("deflate") || ce.equals("sdch"));
 	}
 
 	@Override
