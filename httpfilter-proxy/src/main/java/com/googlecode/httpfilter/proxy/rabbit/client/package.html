@@ -1,0 +1,19 @@
+<html>
+<head>
+<title>RabbIT/4</title>
+<body>
+Classes that can be used to build http clients.
+
+<p>
+To build a simple client application you create a {@link rabbit.client.ClientBase}
+and then call {@link rabbit.client.ClientBase#sendRequest(HttpHeader, ClientListener)}.
+When your listener get the 
+{@link rabbit.client.ClientListener#handleResponse(HttpHeader, HttpHeader, WebConnectionResourceSource)}
+method called you can either be done (HEAD requests) or you can add a 
+{@link rabbit.httpio.BlockListener} to the {@link rabbit.httpio.WebConnectionResourceSource} to 
+handle the data of the resource.
+</body>
+<address>
+<a href="mailto:robo@khelekore.org">Robert Olofsson</a>
+</address>
+</html>
