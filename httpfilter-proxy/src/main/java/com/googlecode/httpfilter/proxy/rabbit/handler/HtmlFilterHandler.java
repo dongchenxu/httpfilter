@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
+
 import com.googlecode.httpfilter.proxy.rabbit.filter.HtmlFilter;
 import com.googlecode.httpfilter.proxy.rabbit.filter.HtmlFilterFactory;
 import com.googlecode.httpfilter.proxy.rabbit.html.HtmlBlock;
@@ -29,7 +30,7 @@ import com.googlecode.httpfilter.proxy.rabbit.zip.GZipUnpacker;
  * 
  * @author <a href="mailto:robo@khelekore.org">Robert Olofsson</a>
  */
-public class FilterHandler extends GZipHandler {
+public class HtmlFilterHandler extends GZipHandler {
 	private List<HtmlFilterFactory> filterClasses = new ArrayList<HtmlFilterFactory>();
 	private boolean repack = false;
 	private String defaultCharSet = null;
@@ -48,7 +49,7 @@ public class FilterHandler extends GZipHandler {
 	 * Create a new FilterHandler that is uninitialized. Normally this should
 	 * only be used for the factory creation.
 	 */
-	public FilterHandler() {
+	public HtmlFilterHandler() {
 		// empty
 	}
 
@@ -79,7 +80,7 @@ public class FilterHandler extends GZipHandler {
 	 * @param filterClasses
 	 *            the filters to use
 	 */
-	public FilterHandler(Connection con, TrafficLoggerHandler tlh,
+	public HtmlFilterHandler(Connection con, TrafficLoggerHandler tlh,
 			HttpHeader request, HttpHeader response, ResourceSource content,
 			boolean mayCache, boolean mayFilter, long size, boolean compress,
 			boolean repack, List<HtmlFilterFactory> filterClasses) {
@@ -201,7 +202,7 @@ public class FilterHandler extends GZipHandler {
 		}
 
 		public void failed(Exception e) {
-			FilterHandler.this.failed(e);
+			HtmlFilterHandler.this.failed(e);
 		}
 	}
 
@@ -209,7 +210,7 @@ public class FilterHandler extends GZipHandler {
 	public Handler getNewInstance(Connection con, TrafficLoggerHandler tlh,
 			HttpHeader header, HttpHeader webHeader, ResourceSource content,
 			boolean mayCache, boolean mayFilter, long size) {
-		FilterHandler h = new FilterHandler(con, tlh, header, webHeader,
+		HtmlFilterHandler h = new HtmlFilterHandler(con, tlh, header, webHeader,
 				content, mayCache, mayFilter, size, compress, repack,
 				filterClasses);
 		h.defaultCharSet = defaultCharSet;
@@ -269,6 +270,7 @@ public class FilterHandler extends GZipHandler {
 			restBlock = null;
 		}
 		parser.setText(arr, off, len);
+		
 		HtmlBlock currentBlock;
 		try {
 			currentBlock = parser.parse();
