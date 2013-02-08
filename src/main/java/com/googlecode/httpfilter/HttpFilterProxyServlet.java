@@ -6,7 +6,6 @@ import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
 import java.net.Socket;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -187,13 +186,13 @@ public class HttpFilterProxyServlet implements Servlet {
 			return;
 		}
 		
-		try {
-			URI.create(httpUri.toString());
-		}catch(IllegalArgumentException e) {
-			// fix by dukun@taobao.com
-			bpResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
-			return;
-		}
+//		try {
+//			URI.create(httpUri.toString());
+//		}catch(IllegalArgumentException e) {
+//			// fix by dukun@taobao.com
+//			bpResponse.sendError(HttpServletResponse.SC_NOT_FOUND);
+//			return;
+//		}
 
 		final HttpExchange exchange = _httpExchangeFactory.newInstance(httpUri, bpRequest, bpResponse);
 
