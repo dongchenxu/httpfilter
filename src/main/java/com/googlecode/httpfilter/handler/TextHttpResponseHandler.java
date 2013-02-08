@@ -2,7 +2,6 @@ package com.googlecode.httpfilter.handler;
 
 import java.nio.charset.Charset;
 
-import org.apache.commons.lang.StringUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.slf4j.Logger;
@@ -24,10 +23,10 @@ public class TextHttpResponseHandler implements HttpResponseHandler {
 	@Override
 	public boolean isHandleResponse(HttpFilterExchange exchange) {
 
-		// 需要对其内容进行解压
-		if(!StringUtils.isNotEmpty(exchange.getResponseFields().getStringField("Content-Encoding"))){
-			return false;
-		};
+//		// 需要对其内容进行解压
+//		if(StringUtils.isNotEmpty(exchange.getResponseFields().getStringField("Content-Encoding"))){
+//			return false;
+//		};
 		
 		// 如果当前的mime不在约定mimes指定范围内，则不能当成Text处理
 		final String mime = HttpUtils.getMIME(exchange.getResponseFields());
@@ -58,7 +57,7 @@ public class TextHttpResponseHandler implements HttpResponseHandler {
 		} else {
 			returnBlock = textBlock;
 		}
-		logger.debug("convert to {}. URI={}", 
+		logger.info("convert to {}. URI={}", 
 				new Object[]{returnBlock.getClass().getSimpleName(), exchange.getRequestURI()});
 		final ResponseHandlerResult result = new ResponseHandlerResult(returnBlock);
 		return result;
