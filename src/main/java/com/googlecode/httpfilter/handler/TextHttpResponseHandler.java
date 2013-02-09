@@ -57,7 +57,7 @@ public class TextHttpResponseHandler implements HttpResponseHandler {
 		} else {
 			returnBlock = textBlock;
 		}
-		logger.info("convert to {}. URI={}", 
+		logger.debug("convert to {}. URI={}", 
 				new Object[]{returnBlock.getClass().getSimpleName(), exchange.getRequestURI()});
 		final ResponseHandlerResult result = new ResponseHandlerResult(returnBlock);
 		return result;
