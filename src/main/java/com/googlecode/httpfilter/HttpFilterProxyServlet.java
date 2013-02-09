@@ -80,7 +80,10 @@ public class HttpFilterProxyServlet implements Servlet {
 		try {
 			_client.stop();
 		} catch (Exception x) {
-			logger.debug("destroy failed.", x);
+			logger.debug("\n[DEBUG] : debug for \"{}\"\n  MSG : {}\n", new Object[]{
+				"destroy httpfilter proxy servlet occre exception.",
+				x
+			});
 		}
 	}
 
@@ -179,7 +182,6 @@ public class HttpFilterProxyServlet implements Servlet {
 		}
 		
 		final HttpURI httpUri = proxyHttpURI(bpRequest);
-		logger.debug(" proxy "+bpRequest.getRequestURI()+" --> "+httpUri);
 
 		if (httpUri == null) {
 			bpResponse.sendError(HttpServletResponse.SC_FORBIDDEN);

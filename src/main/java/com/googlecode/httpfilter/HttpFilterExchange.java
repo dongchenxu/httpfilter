@@ -83,7 +83,11 @@ public class HttpFilterExchange extends CachedExchange {
 				}
 			}
 		} catch (Exception e) {
-			logger.warn("handle response filter occre exception, URI={}", new Object[]{_bpRequest.getRequestURI(), e});
+			logger.warn("\n[WARN] : warn for \"{}\"\n  URL : {}\n", new Object[]{
+				"handle response handler occre exception.",
+				getRequestURL(),
+				e
+			});
 		}
 		
 	}
@@ -106,7 +110,6 @@ public class HttpFilterExchange extends CachedExchange {
 			}
 		}
 		
-		logger.debug(name+": (filtered): "+valueStr);
 		_bpResponse.addHeader(nameStr, valueStr);
 		super.onResponseHeader(name, value);
 		
@@ -117,7 +120,11 @@ public class HttpFilterExchange extends CachedExchange {
 		super.onResponseHeaderComplete();
 		
 		final String mime = HttpUtils.getMIME(getResponseFields());
-		logger.debug("url={};mime={}",_bpRequest.getRequestURL(),mime);
+		logger.debug("\n[DEBUG] : debug for \"{}\"\n  URL : {}\n  MSG : mime={}\n", new Object[]{
+			"snoop the response mime type.",
+			getRequestURL(),
+			mime
+		});
 		_waitForCompleted = MIME.isSupport(mime);
 		_waitForCompletedBuffer = createBuffer(_waitForCompleted);
 		
@@ -127,7 +134,12 @@ public class HttpFilterExchange extends CachedExchange {
 	@Override
 	protected void onResponseStatus(Buffer version, int status,
 			Buffer reason) throws IOException {
-		logger.debug("response status changed. URI={};status={};reason={}", new Object[]{_bpRequest.getRequestURI(), status, reason});
+		logger.debug("\n[DEBUG] : debug for \"{}\"\n  URL : {}\n  MSG : status={};reason={}\n", new Object[]{
+			"response status changed.",
+			getRequestURL(),
+			status,
+			reason
+		});
 	
 		if (reason != null && reason.length() > 0) {
 			_bpResponse.setStatus(status, reason.toString());
@@ -141,7 +153,11 @@ public class HttpFilterExchange extends CachedExchange {
 	@Override
 	protected void onResponseContent(Buffer content)
 			throws IOException {
-		logger.debug("content for URI={};length={}", _bpRequest.getRequestURI(), content.length());
+		logger.debug("\n[DEBUG] : debug for \"{}\"\n  URL : {}\n  MSG : content.length={}\n", new Object[]{
+			"snoop the response content length.",
+			getRequestURL(),
+			content.length()
+		});
 		if( _waitForCompleted ) {
 			_waitForCompletedBuffer.put(content);
 		} else {
@@ -151,7 +167,11 @@ public class HttpFilterExchange extends CachedExchange {
 
 	@Override
 	protected void onResponseComplete() throws IOException {
-		logger.debug("complete for URI={};", new Object[]{_bpRequest.getRequestURI()});
+		logger.debug("\n[DEBUG] : debug for \"{}\"\n  URL : {}\n  MSG : {}\n", new Object[]{
+			"snoop the response content complete length.",
+			getRequestURL(),
+			"all response content receive completed."
+		});
 		try {
 			if( _waitForCompleted ) {
 				ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -167,14 +187,27 @@ public class HttpFilterExchange extends CachedExchange {
 						}
 					}
 				} catch (Exception e) {
-					logger.warn("handle response filter occre exception, URI={}", new Object[]{_bpRequest.getRequestURI(), e});
+					logger.warn("\n[WARN] : warn for \"{}\"\n  URL : {}\n", new Object[]{
+						"response handler occre exception.",
+						getRequestURL(),
+						e
+					});
 				}
 				try {
 					_bpOut.write(block.getDatas());
 				}catch(EofException e) {
 					// 出这种错，只可能是浏览器关闭了链接所导致
-					logger.warn("EofException for URL={};",_bpRequest.getRequestURL());
-					logger.debug("EofException for URL={};",_bpRequest.getRequestURL(), e);
+					if( !logger.isDebugEnabled() ) {
+						logger.warn("\n[WARN] : warn for \"{}\"\n  URL : {}\n", new Object[]{
+							"bTp write data occre Eof exception.",
+							getRequestURL()
+						});
+					}
+					logger.debug("\n[DEBUG] : debug for \"{}\"\n  URL : {}\n", new Object[]{
+						"bTp write data occre Eof exception.",
+						getRequestURL(),
+						e
+					});
 				}
 			}
 		} finally {
@@ -277,12 +310,29 @@ public class HttpFilterExchange extends CachedExchange {
 	private void handleOnException(Throwable ex, HttpServletRequest request,
 			HttpServletResponse response) {
 		if(ex instanceof EofException) {
-			logger.debug("EOF Error", ex);
+			logger.debug("\n[DEBUG] : debug for \"{}\"\n  URL : {}\n", new Object[]{
+				"http exchange occer Eof error.",
+				getRequestURL(),
+				ex
+			});
 		} else if (ex instanceof IOException) {
-			logger.warn("I/O Error URI={}, MSG={}", new Object[]{request.getRequestURI(), ex.toString()});
-			logger.debug("I/O Error", ex);
+			if( !logger.isDebugEnabled() ) {
+				logger.warn("\n[WARN] : warn for \"{}\"\n  URL : {}\n", new Object[]{
+					"http exchange occre I/O exception.",
+					getRequestURL()
+				});
+			}
+			logger.debug("\n[DEBUG] : debug for \"{}\"\n  URL : {}\n", new Object[]{
+				"http exchange occre I/O exception.",
+				getRequestURL(),
+				ex
+			});
 		} else {
-			logger.warn("I/O Error", ex);
+			logger.warn("\n[WARN] : warn for \"{}\"\n  URL : {}\n", new Object[]{
+				"http exchange occre exception.",
+				getRequestURL(),
+				ex
+			});
 		}
 			
 		if (!response.isCommitted()) {
@@ -337,6 +387,14 @@ public class HttpFilterExchange extends CachedExchange {
 		String completePath = httpUri.getCompletePath();
 		setRequestURI(completePath == null ? "/" : completePath);
 //		setRequestURI(StringUtils.isBlank(url.getPath()) ? "/" : url.getPath());
+	}
+	
+	/**
+	 * 获取请求URL字符信息
+	 * @return
+	 */
+	public String getRequestURL() {
+		return _bpRequest.getRequestURL().toString();
 	}
 
 }

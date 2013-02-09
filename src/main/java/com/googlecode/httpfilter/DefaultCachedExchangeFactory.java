@@ -128,7 +128,11 @@ public class DefaultCachedExchangeFactory implements CachedExchangeFactory {
 		exchange.setURL(new URL(httpUri.toString()));
 //		exchange.setURL(httpUri.toString());
 		
-		logger.debug("method={};URI={};protocol={};", new Object[]{request.getMethod(),httpUri,request.getProtocol()});
+		logger.debug("\n[DEBUG] : debug for \"{}\"\n  URL : {}\n  MSG : {}\n", new Object[]{
+			"handle http request.",
+			exchange.getRequestURL(),
+			"protpcol="+request.getProtocol()
+		});
 		
 		exchange.setScheme(HttpSchemes.HTTPS.equals(request.getScheme()) 
 				? HttpSchemes.HTTPS_BUFFER
@@ -185,7 +189,6 @@ public class DefaultCachedExchangeFactory implements CachedExchangeFactory {
 			while (vals.hasMoreElements()) {
 				String val = (String) vals.nextElement();
 				if (val != null) {
-					logger.debug(hdr+": "+val);
 					exchange.setRequestHeader(hdr, val);
 				}
 			}

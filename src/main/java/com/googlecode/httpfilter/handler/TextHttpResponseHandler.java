@@ -57,8 +57,11 @@ public class TextHttpResponseHandler implements HttpResponseHandler {
 		} else {
 			returnBlock = textBlock;
 		}
-		logger.debug("convert to {}. URI={}", 
-				new Object[]{returnBlock.getClass().getSimpleName(), exchange.getRequestURI()});
+		logger.debug("\n[DEBUG] : debug for \"{}\"\n  URL : {}\n  MSG : block cover to={}\n", new Object[]{
+			"text block convert.",
+			exchange.getRequestURL(),
+			returnBlock.getClass().getSimpleName()
+		});
 		final ResponseHandlerResult result = new ResponseHandlerResult(returnBlock);
 		return result;
 	}
@@ -66,7 +69,6 @@ public class TextHttpResponseHandler implements HttpResponseHandler {
 	private HtmlBlock convertToHtmlBlock(final TextBlock textBlock, final DataBlock block) {
 		final HtmlBlock html = new HtmlBlock(textBlock.getText(), textBlock.getCharset());
 		final Document doc = html.getDocument();
-//		doc.select("meta[charset]").first().attr("charset")
 		
 		Charset htmlCharset = textBlock.getCharset();
 		
