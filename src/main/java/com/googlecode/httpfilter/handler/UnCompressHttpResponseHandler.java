@@ -37,6 +37,7 @@ public class UnCompressHttpResponseHandler implements HttpResponseHandler {
 
 		logger.debug("\n[DEBUG] : debug for \"{}\"\n  URL : {}\n\tcompress={}\n\tblock-size={}\n\tresp-status={}\n", new Object[]{
 			"uncompress handler.",
+			exchange.getRequestURL(),
 			ct,
 			block.getDatas().length,
 			exchange.getResponseStatus()
