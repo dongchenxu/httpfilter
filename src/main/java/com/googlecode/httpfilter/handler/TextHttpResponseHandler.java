@@ -85,7 +85,11 @@ public class TextHttpResponseHandler implements HttpResponseHandler {
 		 */
 		final Element metaChEle = doc.select("meta[charset]").first();
 		if( null != metaChEle ) {
-			htmlCharset = HttpUtils.getCharset(metaChEle.attr("charset"), htmlCharset);
+			try {
+				htmlCharset = Charset.forName(metaChEle.attr("charset"));
+			} catch(Exception e) {
+				// ingore
+			}
 		}
 		
 		/*
