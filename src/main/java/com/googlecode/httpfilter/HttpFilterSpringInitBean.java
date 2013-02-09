@@ -29,7 +29,7 @@ public class HttpFilterSpringInitBean {
 
 	private static final Logger logger = LoggerFactory.getLogger("httpfilter");
 	
-	@Value("${httpfilter_proxy_port}")
+	@Value("${httpfilter.proxy.port}")
 	private int proxyPort;
 	
 	private Server server;
