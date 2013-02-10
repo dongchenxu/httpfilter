@@ -11,9 +11,7 @@
           	http://www.springframework.org/schema/context
           	http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-	<context:annotation-config />
-	<context:component-scan base-package="com.googlecode.httpfilter" />
-	<context:property-placeholder location="WEB-INF/httpfilter.properties"/>
+	<import resource="classpath:/spring/httpfilter-spring.xml"/>
 
 	<bean class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<property name="viewClass"
