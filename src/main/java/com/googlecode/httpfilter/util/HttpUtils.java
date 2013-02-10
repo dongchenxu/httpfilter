@@ -45,16 +45,12 @@ public class HttpUtils {
         if (beginIndex > 0) {
             beginIndex += look.length();
             String charSet = ct.substring(beginIndex).trim();
-            charSet = charSet.replace("_", "").replace("-", "");
-            if (charSet.equalsIgnoreCase("iso88591")) {
-            	charset = Charset.forName("ISO8859_1");
-            } else {
-            	charset = Charset.forName(charSet);
-            }
+//            charSet = charSet.replace("_", "").replace("-", "");
+            charset = Charset.forName(charSet);
         }
         return charset;
 	}
-
+	
 	/**
 	 * 从ContentType获取MIME类型
 	 * @param fields
