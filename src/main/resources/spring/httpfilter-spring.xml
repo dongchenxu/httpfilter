@@ -11,11 +11,10 @@
           	http://www.springframework.org/schema/tx
           	http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
 
-	<context:annotation-config />
 	<context:component-scan base-package="com.googlecode.httpfilter" />
 	<context:property-placeholder location="WEB-INF/httpfilter.properties" />
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 
-	<import resource="classpath:/spring/httpfilter-ibatis-config.xml" />
+	<import resource="classpath*:/spring/httpfilter-ibatis-config.xml" />
 
 </beans>
