@@ -10,6 +10,8 @@
 	<name>httpfilter</name>
 	<url>https://github.com/oldmanpushcart/httpfilter</url>
 
+	<!-- test -->
+
 	<properties>
 		<project.build.sourceEncoding>GBK</project.build.sourceEncoding>
 		<spring.version>3.0.5.RELEASE</spring.version>
