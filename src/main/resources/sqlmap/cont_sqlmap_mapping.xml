@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="cont">
+
+	<typeAlias alias="cont" type="com.googlecode.httpfilter.domain.ConnectionDO" />
+	<resultMap id="contResult" class="cont">
+		<result property="id" column="id" />
+		<result property="url" column="url" />
+		<result property="reqNasId" column="REQ_DATA_NASID" />
+		<result property="resNasId" column="RES_DATA_NASID" />
+		<result property="serverIP" column="SERVER_IP" />
+		<result property="comtId" column="COMT_ID" />
+		<result property="gmtCreate" column="gmt_Create" />
+	</resultMap>
+
+	<!-- SELECT选择的列名 -->
+	<sql id="cont.columns">
+		id,
+		url,
+		REQ_DATA_NASID,
+		RES_DATA_NASID,
+		SERVER_IP,
+		COMT_ID,
+		gmt_Create
+	</sql>
+
+	<insert id="IbatisConnectionDao.createCont">
+		insert into HTTP_CONNECTION(
+		<include refid="cont.columns" />
+		) values (
+			#id#,
+			#url#,
+			#reqNasId#,
+			#resNasId#,
+			#serverIP#,
+			#comtId#,
+			CURRENT_TIMESTAMP
+		)
+	</insert>
+	
+	<select id="IbatisConnectionDao.generateContId" resultClass="long">
+		select HCONNECTION_SEQUENCE.nextval from dual;
+	</select>
+
+	<select id="IbatisConnectionDao.getContById" resultMap="contResult">  
+        select <include refid="cont.columns"/> from HTTP_CONNECTION where id=#id#
+    </select>
+    
+    <select id="IbatisConnectionDao.getContByComtId" resultMap="contResult">  
+        select <include refid="cont.columns"/> from HTTP_CONNECTION where comt_id=#comtId# and id>#minId#
+    </select>
+
+</sqlMap> 

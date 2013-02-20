@@ -21,7 +21,7 @@
 	</sql>
 
 	<insert id="IbatisNasDao.createNas">
-		insert into httpfilter_nas(
+		insert into NAS(
 		<include refid="nas.columns" />
 		) values (
 			#id#,
@@ -33,15 +33,15 @@
 	</insert>
 	
 	<select id="IbatisNasDao.generateNasId" resultClass="long">
-		select HTTPFILTER_NAS_SEQUENCE.nextval from dual;
+		select NAS_SEQUENCE.nextval from dual;
 	</select>
 
 	<select id="IbatisNasDao.getNasById" resultMap="nasResult">  
-        select <include refid="nas.columns"/> from httpfilter_nas where id=#id#
+        select <include refid="nas.columns"/> from NAS where id=#id#
     </select>
     
     <select id="IbatisNasDao.listNasByBatchNo" resultMap="nasResult">  
-        select <include refid="nas.columns"/> from httpfilter_nas where batch_no=#batchNo#
+        select <include refid="nas.columns"/> from NAS where batch_no=#batchNo#
     </select>
 
 </sqlMap> 

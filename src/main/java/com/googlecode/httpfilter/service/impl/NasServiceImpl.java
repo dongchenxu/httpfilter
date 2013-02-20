@@ -7,12 +7,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.googlecode.httpfilter.domain.MultiResultDO;
+import com.googlecode.httpfilter.constant.ErrorCodeConstants;
 import com.googlecode.httpfilter.domain.NasDO;
 import com.googlecode.httpfilter.domain.SingleResultDO;
 import com.googlecode.httpfilter.manager.BizException;
 import com.googlecode.httpfilter.manager.NasManager;
 import com.googlecode.httpfilter.service.NasService;
+import com.sun.org.apache.xalan.internal.xsltc.compiler.util.ErrorMsg;
 
 @Service
 public class NasServiceImpl implements NasService {
@@ -42,13 +43,14 @@ public class NasServiceImpl implements NasService {
 	}
 
 	@Override
-	public MultiResultDO<NasDO> listNasByBatchNo(String batchNo) {
-		final MultiResultDO<NasDO> result = new MultiResultDO<NasDO>();
+	public SingleResultDO<List<NasDO>> listNasByBatchNo(String batchNo) {
+		final SingleResultDO<List<NasDO>> result = new SingleResultDO<List<NasDO>>();
 		try {
 			final List<NasDO> batchNas = nasManager.listNasByBatchNo(batchNo);
-			result.setModels(batchNas);
+			result.setModel(batchNas);
 		} catch (BizException e) {
 			logger.warn("list nas by batchNo={} failed.", batchNo, e);
+			result.getErrMsg().putError(ErrorCodeConstants.NAS_QUERY_FAILED_BY_BATCHNO);
 			result.setSuccess(false);
 		}//try
 		return result;

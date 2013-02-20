@@ -2,7 +2,6 @@ package com.googlecode.httpfilter.service;
 
 import java.util.List;
 
-import com.googlecode.httpfilter.domain.MultiResultDO;
 import com.googlecode.httpfilter.domain.NasDO;
 import com.googlecode.httpfilter.domain.SingleResultDO;
 
@@ -25,6 +24,6 @@ public interface NasService {
 	 * @param batchNo
 	 * @return
 	 */
-	MultiResultDO<NasDO> listNasByBatchNo(String batchNo);
+	SingleResultDO<List<NasDO>> listNasByBatchNo(String batchNo);
 	
 }

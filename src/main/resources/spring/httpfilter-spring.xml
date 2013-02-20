@@ -14,7 +14,8 @@
 	<context:component-scan base-package="com.googlecode.httpfilter" />
 	<context:property-placeholder location="WEB-INF/httpfilter.properties" />
 	<tx:annotation-driven transaction-manager="transactionManager"/>
-
+	
 	<import resource="classpath*:/spring/httpfilter-ibatis-config.xml" />
-
+	<import resource="classpath*:/sqlmap/*_mapping.xml"/>
+	<import resource="classpath*:/spring/httpfilter-springbean.xml"/>
 </beans>

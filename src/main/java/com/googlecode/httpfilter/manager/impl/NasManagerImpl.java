@@ -27,7 +27,6 @@ public class NasManagerImpl implements NasManager {
 	@Override
 	public NasDO createNas(NasDO nas) throws BizException {
 		try {
-			nas.setBatchNo(generateBatchNo());
 			nas.getFeaturesMap().put("MD5", MD5Utils.getMD5(nas.getContent()));
 			final long nasId = nasDao.createNas(nas);
 			return getNasById(nasId);

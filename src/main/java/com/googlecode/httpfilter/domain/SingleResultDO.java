@@ -9,16 +9,10 @@ package com.googlecode.httpfilter.domain;
 public class SingleResultDO<T> extends BaseResultDO {
 
 	private static final long serialVersionUID = 7987375914110334082L;
-
+	
 	private T model; //返回数据模型
 	
-	public SingleResultDO() {
-		//
-	}
-	
-	public SingleResultDO(final T model) {
-		this.model = model;
-	}
+	private ErrMsg errMsg = new ErrMsg();
 
 	public T getModel() {
 		return model;
@@ -26,6 +20,18 @@ public class SingleResultDO<T> extends BaseResultDO {
 
 	public void setModel(T model) {
 		this.model = model;
+	}
+
+	public ErrMsg getErrMsg() {
+		return errMsg;
+	}
+
+	public void setErrMsg(ErrMsg errMsg) {
+		this.errMsg = errMsg;
+	}
+
+	public void putError(String errorCode, Object... args) {
+		errMsg.putError(errorCode, args);
 	}
 	
 }

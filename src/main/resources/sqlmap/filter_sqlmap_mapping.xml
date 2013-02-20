@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="filter">
+
+	<typeAlias alias="filter" type="com.googlecode.httpfilter.domain.FilterDO" />
+	<resultMap id="filterResult" class="filter">
+		<result property="id" column="id" />
+		<result property="reqUrl" column="req_url" />
+		<result property="key" column="filter_key" />
+		<result property="value" column="filter_value" />
+		<result property="valueNasId" column="FILTER_VALUE_NASID" />
+		<result property="operation" column="OPERATE" />
+		<result property="gmtCreate" column="gmt_create" />
+	</resultMap>
+
+	<!-- SELECT选择的列名 -->
+	<sql id="filter.columns">
+		id,
+		req_url,
+		filter_key,
+		filter_value,
+		FILTER_VALUE_NASID,
+		OPERATE,
+		gmt_create
+	</sql>
+
+	<insert id="IbatisFilterDao.createFilter">
+		insert into FILTER(
+		<include refid="filter.columns" />
+		) values (
+			#id#,
+			#reqUrl#,
+			#key#,
+			#value#,
+			#valueNasId#,
+			#operation#,
+			CURRENT_TIMESTAMP
+		)
+	</insert>
+	
+	<select id="IbatisFilterDao.generateFilterId" resultClass="long">
+		select FILTER_SEQUENCE.nextval from dual;
+	</select>
+
+	<select id="IbatisFilterDao.getFilterById" resultMap="filterResult">  
+        select <include refid="filter.columns"/> from FILTER where id=#id#
+    </select>
+</sqlMap> 
