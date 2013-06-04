@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="toBeCheck">
+
+	<typeAlias alias="toBeCheck" type="com.googlecode.httpfilter.domain.ToBeCheckDO" />
+	<resultMap id="toBeCheckResult" class="toBeCheck">
+		<result property="id" column="id" />
+		<result property="versionId" column="version_id" />
+		<result property="comtIdMain" column="COMT_ID_MAIN" />
+		<result property="comtIdCheck" column="COMT_ID_CHECKED" />
+		<result property="comtIdMain" column="MAIN_ENVRMT" />
+		<result property="comtIdCheck" column="CHECKED_ENVRMT" />
+		<result property="sameReq" column="SAME_ID"/>
+		<result property="isCheck" column="IS_CHECK"/>
+		<result property="gmtCreate" column="gmt_create" />
+	</resultMap>
+
+	<!-- SELECT选择的列名 -->
+	<sql id="toBeCheck.columns">
+		id,
+		version_id,
+		COMT_ID_MAIN,
+		COMT_ID_CHECKED,
+		MAIN_ENVRMT,
+		CHECKED_ENVRMT,
+		SAME_ID,
+		IS_CHECK,
+		gmt_create
+	</sql>
+
+	<insert id="IbatisToBeCheckDao.createToBeCheckDO">
+		insert into compare(
+		<include refid="toBeCheck.columns" />
+		) values (
+			#id#,
+			#versionId#,
+			#comtIdMain#,
+			#comtIdCheck#,
+			#mainEnvrmt#,
+			#checkEnvrmt#,
+			#sameReq#,
+			#isCheck#,
+			CURRENT_TIMESTAMP
+		)
+	</insert>
+	
+	<select id="IbatisToBeCheckDao.generateToBeCheckId" resultClass="long">
+		select COMP_SEQUENCE.nextval from dual;
+	</select>
+
+	<select id="IbatisToBeCheckDao.getToBeCheckDOById" resultMap="toBeCheckResult">  
+        select <include refid="toBeCheck.columns"/> from compare where id=#id#
+    </select>
+</sqlMap> 

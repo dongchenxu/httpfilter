@@ -30,4 +30,13 @@ public class ErrorCodeConstants {
 	
 	@ErrorMessage(errorMessage="创建会话失败！")
 	public static final String CREATE_COMMUNICATION_ERROR = "CREATE_COMMUNICATION_ERROR";
+	
+	@ErrorMessage(errorMessage="查询规则(id=%s)失败！")
+	public static final String GET_RULE_BY_ID_ERROR = "GET_RULE_BY_ID_ERROR";
+	
+	@ErrorMessage(errorMessage="查询待校验的规则(id=%s)失败！")
+	public static final String GET_TOBECHECK_BY_ID_ERROR = "GET_TOBECHECK_BY_ID_ERROR";
+	
+	@ErrorMessage(errorMessage="查询运行版本(id=%s)失败！")
+	public static final String GET_VERSION_BY_ID_ERROR = "GET_VERSION_BY_ID_ERROR";
 }

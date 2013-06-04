@@ -17,6 +17,7 @@ public class HttpRequestHandlerImpl implements HttpRequestHandler {
 	@Override
 	public RequestHandlerResult handleRequest(HttpLiarExchange exchange)
 			throws Exception {
+		exchange.getRequestURI();
 		return new RequestHandlerResult();
 	}
 

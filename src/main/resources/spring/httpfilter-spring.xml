@@ -16,6 +16,6 @@
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 	
 	<import resource="classpath*:/spring/httpfilter-ibatis-config.xml" />
-	<import resource="classpath*:/sqlmap/*_mapping.xml"/>
+	<import resource="classpath*:/sqlmap/*sqlmap_mapping.xml"/>
 	<import resource="classpath*:/spring/httpfilter-springbean.xml"/>
 </beans>

@@ -1,7 +1,5 @@
 package com.googlecode.httpfilter.util;
 
-import java.util.ArrayList;
-
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
