@@ -13,19 +13,23 @@
 </head>
 <body style="background: #FFCC80">
 	<center>添加成功</center>
-	<tr>
-		<th align="right">关键词：</th>
-		<td align="left">${keyWords}</td>
-	</tr>
-	
-	<tr>
-		<th align="right">校验类型：</th>
-		<td align="left">${checkType}</td>
-	</tr>
-	
-	<tr>
-		<th align="right">不校验的字段：</th>
-		<td align="left">${exceptFields}</td>
-	</tr>
+	<table border="0" style="font-size: 10px">
+		<tbody>
+			<tr>
+				<th align="right">关键词：</th>
+				<td align="left">${keyWords}</td>
+			</tr>
+
+			<tr>
+				<th align="right">校验类型：</th>
+				<td align="left">${checkType}</td>
+			</tr>
+
+			<tr>
+				<th align="right">不校验的字段：</th>
+				<td align="left">${exceptFields}</td>
+			</tr>
+		</tbody>
+	</table>
 </body>
 </html>
