@@ -2,39 +2,5 @@
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 <sqlMap namespace="comprule">
 
-	<typeAlias alias="comprule" type="com.googlecode.httpfilter.domain.RuleDO" />
-	<resultMap id="ruleResult" class="comprule">
-		<result property="id" column="id" />
-		<result property="keyWords" column="key_words" />
-		<result property="checkType" column="check_type" />
-		<result property="exceptFields" column="except_fields" />
-		<result property="gmtCreate" column="gmt_create" />
-	</resultMap>
-
-	<!-- SELECT选择的列名 -->
-	<sql id="comprule.columns">
-		id,
-		key_words,
-		check_type,
-		except_fields,
-		gmt_create
-	</sql>
-
-	<insert id="comprule.createRule">
-		insert into comp_rule(
-		<include refid="rule.columns" />
-		) values (
-			#id#,
-			#keyWords#,
-			#checkType#,
-			#exceptFields#,
-			CURRENT_TIMESTAMP
-		)
-	</insert>
 	
-	
-
-	<select id="IbatisRuleDao.getRuleById" resultMap="ruleResult">  
-        select <include refid="comprule.columns"/> from comp_rule where id=#id#
-    </select>
 </sqlMap> 
