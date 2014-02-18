@@ -11,6 +11,7 @@ import com.googlecode.httpfilter.constant.ErrorCodeConstants;
 import com.googlecode.httpfilter.domain.MultiResultDO;
 import com.googlecode.httpfilter.domain.RuleDO;
 import com.googlecode.httpfilter.domain.SingleResultDO;
+import com.googlecode.httpfilter.domain.ToBeCheckDO;
 import com.googlecode.httpfilter.manager.BizException;
 import com.googlecode.httpfilter.manager.RuleManager;
 import com.googlecode.httpfilter.service.RuleService;
@@ -43,7 +44,7 @@ public class RuleServiceImpl implements RuleService {
 			logger.warn("ruleDO get rule failed. id = " + id, e);
 			result.setSuccess(false);
 		}
-		return null;
+		return result;
 	}
 	@Override
 	public MultiResultDO<Long, RuleDO> searchRulesByIds(List<Long> ids) {
@@ -59,6 +60,36 @@ public class RuleServiceImpl implements RuleService {
 			}
 		}
 		result.setSuccess(isSuccess);
+		return result;
+	}
+	@Override
+	public SingleResultDO<List<RuleDO>> searchAllRules() {
+		final SingleResultDO<List<RuleDO>> result = new SingleResultDO<List<RuleDO>>();
+		try{
+			result.setModel( ruleManager.getAllRules() );
+		}catch (BizException e) {
+			logger.warn("ruleDO get allRule failed.", e);
+			result.setSuccess(false);
+		}
+		return result;
+	}
+	@Override
+	public SingleResultDO<RuleDO> delRuleById(long id) {
+		final SingleResultDO<RuleDO> result = new SingleResultDO<RuleDO>();
+		SingleResultDO<RuleDO> qRest = getRuleById(id);
+		if( qRest.isSuccess() ){
+			try{
+				if( ruleManager.removeRuleById(id) > 0 )
+					result.setModel( qRest.getModel() );
+			}catch (BizException e) {
+				logger.warn("ruleDO del Rule failed.", e);
+				result.setSuccess(false);
+			}
+		}else{
+			result.setModel(null);
+			result.setSuccess(true);
+		}
+		
 		return result;
 	}
 }

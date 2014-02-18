@@ -39,4 +39,22 @@ public class ErrorCodeConstants {
 	
 	@ErrorMessage(errorMessage="查询运行版本(id=%s)失败！")
 	public static final String GET_VERSION_BY_ID_ERROR = "GET_VERSION_BY_ID_ERROR";
+	
+	@ErrorMessage(errorMessage="校验请求中无关键词为：(keyWords=%s)的请求！")
+	public static final String MAIN_REQUEST_NOT_CONTAINT_KEYWORDS_ERROR = "MAIN_REQUEST_NOT_CONTAINT_KEYWORDS_ERROR";
+	
+	@ErrorMessage(errorMessage="被校验请求中无关键词为：(keyWords=%s)的请求！")
+	public static final String CHECK_REQUEST_NOT_CONTAINT_KEYWORDS_ERROR = "CHECK_REQUEST_NOT_CONTAINT_KEYWORDS_ERROR";
+	
+	@ErrorMessage(errorMessage="所有请求中无关键词为：(keyWords=%s)的请求！")
+	public static final String CHECK_AND_MAIN_REQUEST_NOT_CONTAINT_KEYWORDS_ERROR = "CHECK_AND_MAIN_REQUEST_NOT_CONTAINT_KEYWORDS_ERROR";
+	
+	@ErrorMessage(errorMessage="待校验请求中请求参数：(param=%s)所对应的值不同！")
+	public static final String CHECK_PARAM_VALUE_NOE_EQUAL = "CHECK_PARAM_VALUE_NOE_EQUAL";
+	
+	@ErrorMessage(errorMessage="待校验请求中缺少参数：(param=%s)")
+	public static final String CHECK_NOT_CONTAIN_PARAM = "CHECK_NOT_CONTAIN_PARAM";
+	
+	@ErrorMessage(errorMessage="待校验response与期待的response内容不符，请求关键字为：(keyWords=%s)")
+	public static final String CHECK_RESPONSE_CONTENT_NOT_SAME = "CHECK_RESPONSE_CONTENT_NOT_SAME";
 }

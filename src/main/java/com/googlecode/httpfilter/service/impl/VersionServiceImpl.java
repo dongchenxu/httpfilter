@@ -37,14 +37,14 @@ public class VersionServiceImpl implements VersionService {
 	@Override
 	public SingleResultDO<VersionDO> getVersionDOById(long id) {
 		SingleResultDO<VersionDO> result = new SingleResultDO<VersionDO>();
-		
+		result.setSuccess(true);
 		try {
 			result.setModel(versionManager.getVersionDO(id));
 		} catch (BizException e) {
 			result.setSuccess(false);
 			logger.warn("VersionDO create version failed.", e);
 		}
-		return null;
+		return result;
 	}
 
 	@Override

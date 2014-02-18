@@ -28,4 +28,11 @@ public interface ToBeCheckService {
 	 * @return
 	 */
 	MultiResultDO<Long, ToBeCheckDO> getToBeCheckDOByIds( List<Long> ids );
+	
+	/**
+	 * 通过ids获取ToBeCheckDO
+	 * @param ids
+	 * @return
+	 */
+	SingleResultDO<List<ToBeCheckDO>> getAllToBeCheckDOByVersionId( long versionId );
 }

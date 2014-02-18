@@ -1,6 +1,7 @@
 package com.googlecode.httpfilter.dao.ibatis;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +29,17 @@ public class IbatisRuleDao extends AbstractSqlMapClientDaoSupport implements Rul
 	public RuleDO getRuleById(long id) throws SQLException {
 		return (RuleDO)getSqlMapClient().queryForObject("IbatisRuleDao.getRuleById",
 				Param.create().add("id", id));
+	}
+
+	@Override
+	public List<RuleDO> getAllRules() throws SQLException {
+		return (List<RuleDO>) getSqlMapClient().queryForList( "IbatisRuleDao.getAllRules" );
+	}
+
+	@Override
+	public int removeRuleById(long id) throws SQLException {
+		return (int) getSqlMapClient().delete( "IbatisRuleDao.delRuleById", 
+				Param.create().add("id", id) );
 	}
 
 }

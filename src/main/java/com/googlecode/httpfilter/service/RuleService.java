@@ -28,4 +28,18 @@ public interface RuleService {
 	 * @return
 	 */
 	MultiResultDO<Long,RuleDO> searchRulesByIds( List<Long> ids );
+	
+	/**
+	 * 获取全部Rules
+	 * @param ids
+	 * @return
+	 */
+	SingleResultDO<List<RuleDO>> searchAllRules();
+	
+	/**
+	 * 根据ruleId删除Rule
+	 * @param id
+	 * @return
+	 */
+	SingleResultDO<RuleDO> delRuleById(long id);
 }

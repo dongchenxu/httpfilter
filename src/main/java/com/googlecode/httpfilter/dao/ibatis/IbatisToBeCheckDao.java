@@ -1,6 +1,7 @@
 package com.googlecode.httpfilter.dao.ibatis;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,5 +31,11 @@ public class IbatisToBeCheckDao extends AbstractSqlMapClientDaoSupport implement
 	private long generateFilterId() throws SQLException {
 		return (Long) getSqlMapClient().queryForObject(
 				"IbatisToBeCheckDao.generateToBeCheckId");
+	}
+
+	@Override
+	public List<ToBeCheckDO> getToBeCheckDOsByVersionId(long versionId)
+			throws SQLException {
+		return (List<ToBeCheckDO>) getSqlMapClient().queryForList("IbatisToBeCheckDao.getToBeCheckDOsByVersionId", Param.create().add("versionId", versionId));
 	}
 }

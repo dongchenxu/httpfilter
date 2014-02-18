@@ -1,5 +1,7 @@
 package com.googlecode.httpfilter.manager;
 
+import java.util.List;
+
 import com.googlecode.httpfilter.domain.RuleDO;
 
 public interface RuleManager {
@@ -17,5 +19,20 @@ public interface RuleManager {
 	 * @return
 	 */
 	RuleDO getRuleById( long id ) throws BizException;
+	
+	
+	/**
+	 * 通过id获取comtDO
+	 * @param id
+	 * @return
+	 */
+	List<RuleDO> getAllRules() throws BizException;
+	
+	/**
+	 * 通过id删除comtDO
+	 * @param id
+	 * @return
+	 */
+	int removeRuleById( long id ) throws BizException;
 	
 }

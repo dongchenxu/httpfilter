@@ -1,6 +1,8 @@
 package com.googlecode.httpfilter.domain;
 
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 import com.googlecode.httpfilter.util.ResultUtils;
 
@@ -39,6 +41,17 @@ public class BaseResultDO extends BaseDO {
 		 */
 		public void putError(String errorCode, Object... args) {
 			this.put(errorCode, ResultUtils.getErrorMsg(errorCode, args));
+		}
+		
+		@SuppressWarnings("rawtypes")
+		public String getErrorCode(){
+			Iterator it = this.entrySet().iterator();
+			String str = "";
+			if( it.hasNext() ){
+				Map.Entry entry = (java.util.Map.Entry) it.next();
+				str += (String) entry.getValue();
+			}
+			return str;
 		}
 		
 	}

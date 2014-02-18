@@ -2,12 +2,15 @@ package com.googlecode.httpfilter.dao.ibatis;
 
 import java.sql.SQLException;
 
+import javax.management.RuntimeErrorException;
+
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.googlecode.httpfilter.dao.Param;
 import com.googlecode.httpfilter.dao.VersionDao;
 import com.googlecode.httpfilter.domain.VersionDO;
+import com.googlecode.httpfilter.manager.BizException;
 @Repository
 @Transactional
 public class IbatisVersionDao extends AbstractSqlMapClientDaoSupport implements VersionDao {
@@ -22,8 +25,12 @@ public class IbatisVersionDao extends AbstractSqlMapClientDaoSupport implements 
 
 	@Override
 	public VersionDO getVersionDOById(long id) throws SQLException {
-		return (VersionDO)getSqlMapClient().queryForObject("IbatisVersionDao.getVersionDOById",
-				Param.create().add("id", id));
+		try{
+			return (VersionDO)getSqlMapClient().queryForObject("IbatisVersionDao.getVersionDOById",
+					Param.create().add("id", id));
+		}catch( Exception e ){
+			throw new SQLException("get VersionDO fail", e);
+		}
 	}
 
 	private long generateFilterId() throws SQLException {

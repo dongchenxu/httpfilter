@@ -6,12 +6,14 @@ public class ToBeCheckDO {
 
 	private long id;
 	private long versionId;
-	private String comtIdMain;
-	private String comtIdCheck;
-	private String mainEnvrmt;
-	private String checkEnvrmt;
+	private long comtIdMain;
+	private long comtIdCheck;
+	private int mainEnvrmt;
+	private int checkEnvrmt;
 	private String sameReq;
 	private boolean isCheck;
+	private boolean isPass;
+	private String features;
 	private Date gmtCreate;
 	
 	public Date getGmtCreate() {
@@ -32,40 +34,53 @@ public class ToBeCheckDO {
 	public void setVersionId(long versionId) {
 		this.versionId = versionId;
 	}
-	public String getComtIdMain() {
+	public long getComtIdMain() {
 		return comtIdMain;
 	}
-	public void setComtIdMain(String comtIdMain) {
+	public void setComtIdMain(long comtIdMain) {
 		this.comtIdMain = comtIdMain;
 	}
-	public String getComtIdCheck() {
+	public long getComtIdCheck() {
 		return comtIdCheck;
 	}
-	public void setComtIdCheck(String comtIdCheck) {
+	public void setComtIdCheck(long comtIdCheck) {
 		this.comtIdCheck = comtIdCheck;
 	}
-	public String getMainEnvrmt() {
-		return mainEnvrmt;
-	}
-	public void setMainEnvrmt(String mainEnvrmt) {
-		this.mainEnvrmt = mainEnvrmt;
-	}
-	public String getCheckEnvrmt() {
-		return checkEnvrmt;
-	}
-	public void setCheckEnvrmt(String checkEnvrmt) {
-		this.checkEnvrmt = checkEnvrmt;
-	}
+	
 	public String getSameReq() {
 		return sameReq;
 	}
 	public void setSameReq(String sameReq) {
 		this.sameReq = sameReq;
 	}
-	public boolean isCheck() {
+	public boolean getisCheck() {
 		return isCheck;
 	}
-	public void setCheck(boolean isCheck) {
+	public void setisCheck(boolean isCheck) {
 		this.isCheck = isCheck;
+	}
+	public void setMainEnvrmt(int mainEnvrmt) {
+		this.mainEnvrmt = mainEnvrmt;
+	}
+	public int getMainEnvrmt() {
+		return mainEnvrmt;
+	}
+	public void setCheckEnvrmt(int checkEnvrmt) {
+		this.checkEnvrmt = checkEnvrmt;
+	}
+	public int getCheckEnvrmt() {
+		return checkEnvrmt;
+	}
+	public void setIsPass(boolean isPass) {
+		this.isPass = isPass;
+	}
+	public boolean getIsPass() {
+		return isPass;
+	}
+	public void setFeatures(String features) {
+		this.features = features;
+	}
+	public String getFeatures() {
+		return features;
 	}
 }

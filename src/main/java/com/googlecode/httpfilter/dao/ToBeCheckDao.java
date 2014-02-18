@@ -1,6 +1,7 @@
 package com.googlecode.httpfilter.dao;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import com.googlecode.httpfilter.domain.ToBeCheckDO;
 
@@ -19,4 +20,11 @@ public interface ToBeCheckDao {
 	 * @return
 	 */
 	ToBeCheckDO getToBeCheckDOById( long id ) throws SQLException;
+	
+	/**
+	 * 通过versionId获取ToBeCheckDO
+	 * @param id
+	 * @return
+	 */
+	List<ToBeCheckDO> getToBeCheckDOsByVersionId( long versionId ) throws SQLException;
 }

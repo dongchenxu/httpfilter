@@ -41,7 +41,7 @@ public class ToBeCheckServiceImpl implements ToBeCheckService {
 		try {
 			result.setModel( toBeCheckManager.getToBeCheckDOById(id) );
 		} catch (BizException e) {
-			logger.warn("query ToBeCheckDO failed.", e);
+			logger.warn("query ToBeCheckDO failed. id = " + id, e);
 			result.setSuccess(false);
 		}
 		return result;
@@ -61,6 +61,19 @@ public class ToBeCheckServiceImpl implements ToBeCheckService {
 			}
 		}
 		result.setSuccess(isSuccess);
+		return result;
+	}
+
+	@Override
+	public SingleResultDO<List<ToBeCheckDO>> getAllToBeCheckDOByVersionId(
+			long versionId) {
+		final SingleResultDO<List<ToBeCheckDO>> result = new SingleResultDO<List<ToBeCheckDO>>();
+		try{
+			result.setModel( toBeCheckManager.getAllToBeCheckDOsByVersionId(versionId) );
+		} catch (BizException e) {
+			logger.warn("query ToBeCheckDO failed.", e);
+			result.setSuccess(false);
+		}
 		return result;
 	}
 
