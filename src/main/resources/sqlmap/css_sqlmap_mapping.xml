@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="css">
+
+	<typeAlias alias="css" type="com.googlecode.httpfilter.domain.CssDO" />
+	<resultMap id="cssResult" class="css">
+		<result property="id" column="id" />
+		<result property="element" column="element" />
+		<result property="cssNasId" column="CSS_DATA_NASID" />
+		<result property="itemId" column="ITEM_ID" />
+		<result property="gmtCreate" column="gmt_Create" />
+	</resultMap>
+
+	<!-- SELECT选择的列名 -->
+	<sql id="css.columns">
+		id,
+		element,
+		CSS_DATA_NASID,
+		ITEM_ID,
+		gmt_Create
+	</sql>
+
+	<insert id="IbatisCssDao.createCss">
+		insert into DC_CSS(
+		<include refid="css.columns" />
+		) values (
+			#id#,
+			#element#,
+			#cssNasId#,
+			#itemId#,
+			CURRENT_TIMESTAMP
+		)
+	</insert>
+	
+	<select id="IbatisCssDao.generateCssId" resultClass="long">
+		select DC_CSS_SEQUENCE.nextval from dual;
+	</select>
+
+	<select id="IbatisCssDao.getCssById" resultMap="cssResult">  
+        select <include refid="css.columns"/> from DC_CSS where id=#id#
+    </select>
+    
+    <select id="IbatisCssDao.getCssByItemId" resultMap="cssResult">  
+        select <include refid="css.columns"/> from DC_CSS where item_id=#itemId#
+    </select>
+
+</sqlMap> 

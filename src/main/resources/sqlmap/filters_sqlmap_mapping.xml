@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="filters">
+
+	<typeAlias alias="filters" type="com.googlecode.httpfilter.domain.FiltersDO" />
+	<resultMap id="filtersResult" class="filters">
+		<result property="id" column="id" />
+		<result property="filterIds" column="FILTER_IDS" />
+		<result property="gmtCreate" column="gmt_create" />
+	</resultMap>
+
+	<!-- SELECT选择的列名 -->
+	<sql id="filters.columns">
+		id,
+		FILTER_IDS,
+		gmt_create
+	</sql>
+
+	<insert id="IbatisFiltersDao.createFilters">
+		insert into FILTERS (
+		<include refid="filters.columns" />
+		) values (
+			#id#,
+			#filterIds#,
+			CURRENT_TIMESTAMP
+		)
+	</insert>
+	
+	<select id="IbatisFiltersDao.generateFiltersId" resultClass="long">
+		select FILTERS_SEQUENCE.nextval from dual;
+	</select>
+
+	<select id="IbatisFiltersDao.getFiltersById" resultMap="filtersResult">  
+        select <include refid="filters.columns"/> from FILTERS where id=#id#
+    </select>
+</sqlMap> 

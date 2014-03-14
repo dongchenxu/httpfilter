@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="nas">
+
+	<typeAlias alias="nas" type="com.googlecode.httpfilter.domain.NasDO" />
+	<resultMap id="nasResult" class="nas">
+		<result property="id" column="id" />
+		<result property="batchNo" column="batch_no" />
+		<result property="gmtCreate" column="gmt_create" />
+		<result property="features" column="features" />
+		<result property="content" column="content" typeHandler="org.springframework.orm.ibatis.support.BlobByteArrayTypeHandler" />
+	</resultMap>
+
+	<!-- SELECT选择的列名 -->
+	<sql id="nas.columns">
+		id,
+		batch_no,
+		gmt_create,
+		features,
+		content
+	</sql>
+
+	<insert id="IbatisNasDao.createNas">
+		insert into NAS(
+		<include refid="nas.columns" />
+		) values (
+			#id#,
+			#batchNo#,
+			CURRENT_TIMESTAMP,
+			#features#,
+			#content,handler=org.springframework.orm.ibatis.support.BlobByteArrayTypeHandler#
+		)
+	</insert>
+	
+	<select id="IbatisNasDao.generateNasId" resultClass="long">
+		select NAS_SEQUENCE.nextval from dual;
+	</select>
+
+	<select id="IbatisNasDao.getNasById" resultMap="nasResult">  
+        select <include refid="nas.columns"/> from NAS where id=#id#
+    </select>
+    
+    <select id="IbatisNasDao.listNasByBatchNo" resultMap="nasResult">  
+        select <include refid="nas.columns"/> from NAS where batch_no=#batchNo#
+    </select>
+
+</sqlMap> 
